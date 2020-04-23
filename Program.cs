@@ -26,14 +26,20 @@ namespace Reserva
                 Console.Write("Check-out date (dd/MM/yyyy): ");
                 checkOut = DateTime.Parse(Console.ReadLine());
 
-                DateTime now = DateTime.Now;
-                if (checkIn < now || checkOut < now){
-                    Console.WriteLine("Erro na reserva");
-                }else if(checkOut <= checkIn){
-                    Console.WriteLine("Erro na reserva, saida < entrada");
+                string error = reservation.UpdateDates(checkIn, checkOut);
+                if(error != null){
+                    Console.WriteLine("Error in reservation: " + error);
                 }else{
-                    reservation.UpdateDates(checkIn, checkOut);
+                    Console.WriteLine("Reservation: " + reservation);
                 }
+                // DateTime now = DateTime.Now;
+                // if (checkIn < now || checkOut < now){
+                //     Console.WriteLine("Erro na reserva");
+                // }else if(checkOut <= checkIn){
+                //     Console.WriteLine("Erro na reserva, saida < entrada");
+                // }else{
+                //     reservation.UpdateDates(checkIn, checkOut);
+                // }
 
             }            
         }

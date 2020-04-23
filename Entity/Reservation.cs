@@ -21,10 +21,21 @@ namespace Entity
 
         }
 
-        public void UpdateDates(DateTime checkIn, DateTime checkOut)
+        public string UpdateDates(DateTime checkIn, DateTime checkOut)
         {
+            DateTime now = DateTime.Now;
+            if (checkIn < now || checkOut < now){
+                return "Reservation dates for update must be future dates";
+            }if(checkOut <= checkIn){
+                return "Check-out date must be after Check-In";
+            }
+
             this.CheckIn = checkIn;
             this.CheckOut = checkOut;
+            
+            return null;
+
+
         }
         public int Duration()
         {
