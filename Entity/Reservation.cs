@@ -1,6 +1,7 @@
 using System;
+using Reserva.Entity.Exceptions;
 
-namespace Entity
+namespace Reserva.Entity
 {
     public class Reservation
     {     
@@ -15,27 +16,26 @@ namespace Entity
 
         public Reservation(int roomNumber, DateTime checkIn, DateTime checkOut)
         {
+            if(checkOut <= checkIn){
+                throw new DomainException("Check-out date must be after Check-In");
+            }
             this.RoomNumber = roomNumber;
             this.CheckIn = checkIn;
             this.CheckOut = checkOut;
 
         }
 
-        public string UpdateDates(DateTime checkIn, DateTime checkOut)
+        public void UpdateDates(DateTime checkIn, DateTime checkOut)
         {
             DateTime now = DateTime.Now;
             if (checkIn < now || checkOut < now){
-                return "Reservation dates for update must be future dates";
+                throw new DomainException("Reservation dates for update must be future dates");
             }if(checkOut <= checkIn){
-                return "Check-out date must be after Check-In";
+                throw new DomainException("Check-out date must be after Check-In");
             }
 
             this.CheckIn = checkIn;
             this.CheckOut = checkOut;
-            
-            return null;
-
-
         }
         public int Duration()
         {
