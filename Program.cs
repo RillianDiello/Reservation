@@ -47,6 +47,10 @@ namespace Reserva
                 }
             }catch(DomainException e){
                 Console.WriteLine("Erro in reservation: " + e.Message);
+            }catch(FormatException e){
+                Console.WriteLine("Format erro: " + e.Message);
+            }catch(Exception e){
+                Console.WriteLine("Unexpected error: " + e.Message);
             }
         }
     }
